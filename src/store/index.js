@@ -6,7 +6,7 @@ export default createStore({
   },
   mutations: {
     TOGGLE_INVOICE(state) {
-      state.invoiceModal = !state.invoiceModal
+      state.invoiceModal = !state.invoiceModal;
     }
   },
   actions: {
