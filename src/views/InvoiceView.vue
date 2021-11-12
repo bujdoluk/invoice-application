@@ -5,7 +5,7 @@
     </router-link>
 
     <!-- Header -->
-    <div class="header flex">
+    <div v-if="!mobile" class="header flex">
       <div class="left flex">
         <span>Status</span>
         <div
@@ -43,8 +43,26 @@
       </div>
     </div>
 
+    <div v-else class="header flex">
+      <div class="left flex">
+        <span>Status</span>
+        <div
+          class="status-button flex"
+          :class="{
+            paid: currentInvoice.invoicePaid,
+            draft: currentInvoice.invoiceDraft,
+            pending: currentInvoice.invoicePending,
+          }"
+        >
+          <span v-if="currentInvoice.invoicePaid">Paid</span>
+          <span v-if="currentInvoice.invoiceDraft">Draft</span>
+          <span v-if="currentInvoice.invoicePending">Pending</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Invoice Details -->
-    <div class="invoice-details flex flex-column">
+    <div v-if="mobile" class="invoice-details flex flex-column">
       <div class="top flex">
         <div class="left flex flex-column">
           <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
@@ -105,6 +123,68 @@
         </div>
       </div>
     </div>
+
+    <!-- Mobile Invoice Details <= 375px -->
+    <div v-else class="invoice-details flex flex-column">
+      <!-- Top -->
+      <div class="top flex flex-column">
+        <div class="left flex flex-column">
+          <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
+          <p>{{ currentInvoice.productDescription }}</p>
+        </div>
+        <div class="right flex flex-column">
+          <p>{{ currentInvoice.billerStreetAddress }}</p>
+          <p>{{ currentInvoice.billerCity }}</p>
+          <p>{{ currentInvoice.billerZipCode }}</p>
+          <p>{{ currentInvoice.billerCountry }}</p>
+        </div>
+      </div>
+      <!-- Middle -->
+      <div class="middle flex">
+        <div class="payment flex flex-column">
+          <h4>Invoice Date</h4>
+          <p>{{ currentInvoice.invoiceDate }}</p>
+          <h4>Payment Date</h4>
+          <p>{{ currentInvoice.paymentDueDate }}</p>
+          <h4>Sent to</h4>
+          <p>{{ currentInvoice.clientEmail }}</p>
+        </div>
+
+        <div class="bill flex flex-column">
+          <h4>Bill To</h4>
+          <p>{{ currentInvoice.clientName }}</p>
+          <p>{{ currentInvoice.clientStreetAddress }}</p>
+          <p>{{ currentInvoice.clientCity }}</p>
+          <p>{{ currentInvoice.clientZipCode }}</p>
+          <p>{{ currentInvoice.clientCountry }}</p>
+        </div>
+      </div>
+      <!-- Bottom -->
+      <div class="bottom flex flex-column">
+        <div class="billing-items">
+          <div class="heading flex">
+            <p>Item Name</p>
+            <p>QTY</p>
+            <p>Price</p>
+            <p>Total</p>
+          </div>
+          <div
+            v-for="(item, index) in currentInvoice.invoiceItemList"
+            :key="index"
+            class="item flex"
+          >
+            <p>{{ item.itemName }}</p>
+            <p>{{ item.qty }}</p>
+            <p>{{ item.price }}</p>
+            <p>{{ item.total }}</p>
+          </div>
+        </div>
+        <div class="total flex">
+          <p>Amount Due</p>
+          <p>{{ currentInvoice.invoiceTotal }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -115,10 +195,13 @@ export default {
   data() {
     return {
       currentInvoice: null,
+      mobile: null,
     };
   },
   created() {
     this.getCurrentInvoice();
+    this.checkScreen();
+    window.addEventListener("resize", this.checkScreen);
   },
   methods: {
     ...mapMutations([
@@ -132,6 +215,15 @@ export default {
       "UPDATE_STATUS_TO_PENDING",
       "UPDATE_STATUS_TO_PAID",
     ]),
+
+    checkScreen() {
+      const windowWidth = window.innerWidth;
+      if (windowWidth <= 375) {
+        this.mobile = true;
+        return;
+      }
+      this.mobile = false;
+    },
 
     getCurrentInvoice() {
       this.SET_CURRENT_INVOICE(this.$route.params.invoiceId);
@@ -196,6 +288,11 @@ export default {
     .left {
       align-items: center;
 
+      margin-left: 30px;
+      @media (min-width: 376px) {
+        margin-left: 0;
+      }
+
       span {
         color: #dfe3fa;
         margin-right: 16px;
@@ -217,6 +314,11 @@ export default {
     margin-top: 24px;
 
     .top {
+      flex-direction: column;
+      align-items: flex-start;
+      @media (min-width: 376px) {
+        flex-direction: row;
+      }
       div {
         color: #dfe3fa;
         flex: 1;
@@ -224,6 +326,11 @@ export default {
 
       .left {
         font-size: 12px;
+        margin-bottom: 20px;
+        @media (min-width: 376px) {
+          margin-bottom: 0;
+        }
+
         p:first-child {
           font-size: 24px;
           text-transform: uppercase;
@@ -242,7 +349,11 @@ export default {
 
       .right {
         font-size: 12px;
-        align-items: flex-end;
+        align-items: flex-start;
+
+        @media (min-width: 376px) {
+          align-items: flex-end;
+        }
       }
     }
 
@@ -290,7 +401,10 @@ export default {
       }
 
       .send-to {
-        flex: 2;
+        flex: 0;
+        @media (min-width: 376px) {
+          flex: 2;
+        }
       }
     }
 

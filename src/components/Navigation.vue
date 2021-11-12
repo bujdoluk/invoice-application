@@ -3,7 +3,7 @@
     <div class="top flex">
       <img src="@/assets/logo.svg" alt="logo" />
     </div>
-    <div class="bottom flex flex-column">
+    <div class="bottom flex">
       <div class="theme flex">
         <img
           @click="switchTheme"
@@ -43,6 +43,7 @@ header {
   border-radius: 0 20px 20px 0;
   background-color: #7c5dfa;
   justify-content: center;
+
   padding: 24px;
   @media (min-width: 900px) {
     width: 100%;
@@ -57,25 +58,36 @@ header {
 .bottom {
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+  @media (min-width: 900px) {
+    flex-direction: column;
+  }
 }
 
 .theme {
-  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
   width: 90px;
   justify-content: center;
-  padding: 20px;
+  padding: 25px;
+  @media (min-width: 900px) {
+    border-bottom: 1px solid grey;
+    border-right: none;
+  }
 }
 
 .theme-img {
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  margin: 20px 0;
+  margin: 0 20px;
+  @media (min-width: 900px) {
+    margin: 20px 0;
+  }
 }
 </style>

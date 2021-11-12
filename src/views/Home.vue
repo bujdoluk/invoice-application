@@ -2,11 +2,15 @@
   <div class="home container">
     <!-- Header -->
     <div class="header flex">
-      <div class="left flex flex-column">
+      <div v-if="!mobile" class="left flex flex-column">
         <h1>Invoices</h1>
         <span>There are {{ invoiceData.length }} total invoices</span>
       </div>
-      <div class="right flex">
+      <div v-else class="left flex flex-column">
+        <h1>Invoices</h1>
+        <span>{{ invoiceData.length }} invoices</span>
+      </div>
+      <div v-if="!mobile" class="right flex">
         <div @click="toggleFilterMenu" class="filter flex">
           <span
             >Filter by status
@@ -25,6 +29,27 @@
             <img src="@/assets/icon-plus.svg" alt="" />
           </div>
           <span>New Invoice</span>
+        </div>
+      </div>
+      <div v-else class="right flex">
+        <div @click="toggleFilterMenu" class="filter flex">
+          <span
+            >Filter
+            <span v-if="filteredInvoice">: {{ filteredInvoice }}</span></span
+          >
+          <img src="@/assets/icon-arrow-down.svg" alt="Arrow down" />
+          <ul v-show="filterMenu" class="filter-menu">
+            <li @click="filteredInvoices">Draft</li>
+            <li @click="filteredInvoices">Pending</li>
+            <li @click="filteredInvoices">Paid</li>
+            <li @click="filteredInvoices">Clear Filter</li>
+          </ul>
+        </div>
+        <div @click="newInvoice" class="button flex">
+          <div class="inner-button flex">
+            <img src="@/assets/icon-plus.svg" alt="" />
+          </div>
+          <span>New</span>
         </div>
       </div>
     </div>
@@ -57,9 +82,14 @@ export default {
     return {
       filterMenu: null,
       filteredInvoice: null,
+      mobile: null,
     };
   },
   components: { Invoice },
+  created() {
+    this.checkScreen();
+    window.addEventListener("resize", this.checkScreen);
+  },
   methods: {
     ...mapMutations(["TOGGLE_INVOICE"]),
     newInvoice() {
@@ -76,6 +106,15 @@ export default {
         return;
       }
       this.filteredInvoice = e.target.innerText;
+    },
+
+    checkScreen() {
+      const windowWidth = window.innerWidth;
+      if (windowWidth <= 375) {
+        this.mobile = true;
+        return;
+      }
+      this.mobile = false;
     },
   },
   computed: {
@@ -114,6 +153,16 @@ export default {
       flex: 1;
     }
 
+    .left {
+      h1 {
+        font-size: 20px;
+      }
+
+      span {
+        font-size: 12px;
+      }
+    }
+
     .right {
       justify-content: flex-end;
       align-items: center;
@@ -131,6 +180,10 @@ export default {
         position: relative;
         margin-right: 40px;
         cursor: pointer;
+        font-size: 20px;
+        @media (min-width: 375px) {
+          font-size: 62px;
+        }
 
         img {
           margin-left: 12px;
