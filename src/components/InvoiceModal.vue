@@ -213,7 +213,7 @@
 </template>
 
 <script>
-import db from "../firebase/config";
+import { projectFirestore } from "../firebase/config";
 import Loading from "../components/Loading.vue";
 import { mapActions, mapMutations, mapState } from "vuex";
 import { uid } from "uid";
@@ -343,7 +343,7 @@ export default {
 
       this.calInvoiceTotal();
 
-      const dataBase = db.collection("invoices").doc();
+      const dataBase = projectFirestore.collection("invoices").doc();
 
       await dataBase.set({
         invoiceId: uid(6),
@@ -386,7 +386,7 @@ export default {
 
       this.calInvoiceTotal();
 
-      const dataBase = db.collection("invoices").doc(this.docId);
+      const dataBase = projectFirestore.collection("invoices").doc(this.docId);
 
       await dataBase.update({
         billerStreetAddress: this.billerStreetAddress,

@@ -146,7 +146,10 @@ export default {
   color: white;
 
   .header {
-    margin-bottom: 65px;
+    margin-bottom: 30px;
+    @media (min-width: 376px) {
+      margin-bottom: 65px;
+    }
 
     .left,
     .right {
@@ -170,6 +173,7 @@ export default {
       .button,
       .filter {
         align-items: center;
+        font-weight: bold;
 
         span {
           font-size: 12px;
@@ -181,6 +185,7 @@ export default {
         margin-right: 40px;
         cursor: pointer;
         font-size: 20px;
+        font-weight: bold;
         @media (min-width: 375px) {
           font-size: 62px;
         }

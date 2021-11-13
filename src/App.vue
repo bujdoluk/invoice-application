@@ -1,20 +1,34 @@
 <template>
-  <div v-if="invoicesLoaded">
-    <!-- v-if="!mobile" -->
-    <div class="app flex flex-column">
+  <div class="app flex" v-if="invoicesLoaded">
+    <Login />
+    <!-- <div>
+      <div v-if="showLogin">
+        <h2>Login</h2>
+        <Login />
+        <p>
+          No accoutn yet?
+          <span @click="showLogin = false">Sign Up</span>instead
+        </p>
+      </div>
+      <div v-else>
+        <h2>Sing up</h2>
+        <Signup />
+        <p>
+          Already registered?<span @click="showLogin = true">Log in</span
+          >instead
+        </p>
+        >
+      </div>
+    </div> -->
+    <!-- <div class="app flex flex-column">
       <Navigation />
       <div class="app-content flex flex-column">
         <Modal v-if="modalActive" />
         <transition name="invoice">
           <InvoiceModal v-if="invoiceModal" />
         </transition>
-
         <router-view />
       </div>
-    </div>
-    <!-- <div v-else class="mobile-message flex flex-column">
-      <h2>Sorry, this app is not supported on Mobile Devices</h2>
-      <p>To use this app, please use a computer or a tablet</p>
     </div> -->
   </div>
 </template>
@@ -24,13 +38,16 @@ import { mapState, mapActions } from "vuex";
 import Navigation from "./components/Navigation.vue";
 import InvoiceModal from "./components/InvoiceModal.vue";
 import Modal from "./components/Modal.vue";
+import Signup from "./components/Signup.vue";
+import Login from "./components/Login.vue";
 export default {
   data() {
     return {
       //mobile: null,
+      showLogin: null,
     };
   },
-  components: { Navigation, InvoiceModal, Modal },
+  components: { Navigation, InvoiceModal, Modal, Signup, Login },
   created() {
     this.GET_INVOICES();
     //this.checkScreen();
@@ -119,8 +136,14 @@ button,
 .red {
   background-color: #ec5757;
 }
+.red:hover {
+  background-color: #ff9797;
+}
 .purple {
   background-color: #7c5dfa;
+}
+.purple:hover {
+  background-color: #9277ff;
 }
 .green {
   background-color: #33d69f;

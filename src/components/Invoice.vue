@@ -96,9 +96,12 @@ export default {
   margin-bottom: 16px;
   color: #fff;
   border-radius: 20px;
-  padding: 28px 32px;
+  padding: 14px 16px;
   background-color: #1e2139;
   align-items: center;
+  @media (min-width: 376px) {
+    padding: 28px 32px;
+  }
 
   span {
     font-size: 13px;

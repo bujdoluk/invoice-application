@@ -1,189 +1,212 @@
 <template>
-  <div v-if="currentInvoice" class="invoice-view container">
-    <router-link class="nav-link flex" :to="{ name: 'Home' }">
-      <img src="@/assets/icon-arrow-left.svg" alt="left" /> Go Back
-    </router-link>
+  <div>
+    <div v-if="currentInvoice" class="invoice-view container">
+      <router-link class="nav-link flex" :to="{ name: 'Home' }">
+        <img src="@/assets/icon-arrow-left.svg" alt="left" /> Go Back
+      </router-link>
 
-    <!-- Header -->
-    <div v-if="!mobile" class="header flex">
-      <div class="left flex">
-        <span>Status</span>
-        <div
-          class="status-button flex"
-          :class="{
-            paid: currentInvoice.invoicePaid,
-            draft: currentInvoice.invoiceDraft,
-            pending: currentInvoice.invoicePending,
-          }"
-        >
-          <span v-if="currentInvoice.invoicePaid">Paid</span>
-          <span v-if="currentInvoice.invoiceDraft">Draft</span>
-          <span v-if="currentInvoice.invoicePending">Pending</span>
-        </div>
-      </div>
-      <div class="right flex">
-        <button @click="toggleEditInvoice" class="dark-purple">Edit</button>
-        <button @click="deleteInvoice(currentInvoice.docId)" class="red">
-          Delete
-        </button>
-        <button
-          v-if="currentInvoice.invoicePending"
-          @click="updateStatusToPaid(currentInvoice.docId)"
-          class="green"
-        >
-          Mark as Paid
-        </button>
-        <button
-          v-if="currentInvoice.invoiceDraft || currentInvoice.invoicePaid"
-          @click="updateStatusToPending(currentInvoice.docId)"
-          class="orange"
-        >
-          Mark as Pending
-        </button>
-      </div>
-    </div>
-
-    <div v-else class="header flex">
-      <div class="left flex">
-        <span>Status</span>
-        <div
-          class="status-button flex"
-          :class="{
-            paid: currentInvoice.invoicePaid,
-            draft: currentInvoice.invoiceDraft,
-            pending: currentInvoice.invoicePending,
-          }"
-        >
-          <span v-if="currentInvoice.invoicePaid">Paid</span>
-          <span v-if="currentInvoice.invoiceDraft">Draft</span>
-          <span v-if="currentInvoice.invoicePending">Pending</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Invoice Details -->
-    <div v-if="mobile" class="invoice-details flex flex-column">
-      <div class="top flex">
-        <div class="left flex flex-column">
-          <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
-          <p>{{ currentInvoice.productDescription }}</p>
-        </div>
-        <div class="right flex flex-column">
-          <p>{{ currentInvoice.billerStreetAddress }}</p>
-          <p>{{ currentInvoice.billerCity }}</p>
-          <p>{{ currentInvoice.billerZipCode }}</p>
-          <p>{{ currentInvoice.billerCountry }}</p>
-        </div>
-      </div>
-
-      <div class="middle flex">
-        <div class="payment flex flex-column">
-          <h4>Invoice Date</h4>
-          <p>{{ currentInvoice.invoiceDate }}</p>
-          <h4>Payment Date</h4>
-          <p>{{ currentInvoice.paymentDueDate }}</p>
-        </div>
-
-        <div class="bill flex flex-column">
-          <h4>Bill To</h4>
-          <p>{{ currentInvoice.clientName }}</p>
-          <p>{{ currentInvoice.clientStreetAddress }}</p>
-          <p>{{ currentInvoice.clientCity }}</p>
-          <p>{{ currentInvoice.clientZipCode }}</p>
-          <p>{{ currentInvoice.clientCountry }}</p>
-        </div>
-
-        <div class="send-to flex flex-column">
-          <p>{{ currentInvoice.clientEmail }}</p>
-        </div>
-      </div>
-
-      <div class="bottom flex flex-column">
-        <div class="billing-items">
-          <div class="heading flex">
-            <p>Item Name</p>
-            <p>QTY</p>
-            <p>Price</p>
-            <p>Total</p>
-          </div>
+      <!-- Header -->
+      <div v-if="!mobile" class="header flex">
+        <div class="left flex">
+          <span>Status</span>
           <div
-            v-for="(item, index) in currentInvoice.invoiceItemList"
-            :key="index"
-            class="item flex"
+            class="status-button flex"
+            :class="{
+              paid: currentInvoice.invoicePaid,
+              draft: currentInvoice.invoiceDraft,
+              pending: currentInvoice.invoicePending,
+            }"
           >
-            <p>{{ item.itemName }}</p>
-            <p>{{ item.qty }}</p>
-            <p>{{ item.price }}</p>
-            <p>{{ item.total }}</p>
+            <span v-if="currentInvoice.invoicePaid">Paid</span>
+            <span v-if="currentInvoice.invoiceDraft">Draft</span>
+            <span v-if="currentInvoice.invoicePending">Pending</span>
           </div>
         </div>
-        <div class="total flex">
-          <p>Amount Due</p>
-          <p>{{ currentInvoice.invoiceTotal }}</p>
+        <div class="right flex">
+          <button @click="toggleEditInvoice" class="dark-purple">Edit</button>
+          <button @click="deleteInvoice(currentInvoice.docId)" class="red">
+            Delete
+          </button>
+          <button
+            v-if="currentInvoice.invoicePending"
+            @click="updateStatusToPaid(currentInvoice.docId)"
+            class="green"
+          >
+            Mark as Paid
+          </button>
+          <button
+            v-if="currentInvoice.invoiceDraft || currentInvoice.invoicePaid"
+            @click="updateStatusToPending(currentInvoice.docId)"
+            class="orange"
+          >
+            Mark as Pending
+          </button>
+        </div>
+      </div>
+
+      <div v-else class="header flex">
+        <div class="left flex">
+          <span>Status</span>
+          <div
+            class="status-button flex"
+            :class="{
+              paid: currentInvoice.invoicePaid,
+              draft: currentInvoice.invoiceDraft,
+              pending: currentInvoice.invoicePending,
+            }"
+          >
+            <span v-if="currentInvoice.invoicePaid">Paid</span>
+            <span v-if="currentInvoice.invoiceDraft">Draft</span>
+            <span v-if="currentInvoice.invoicePending">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice Details -->
+      <div v-if="!mobile" class="invoice-details flex flex-column">
+        <div class="top flex">
+          <div class="left flex flex-column">
+            <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
+            <p>{{ currentInvoice.productDescription }}</p>
+          </div>
+          <div class="right flex flex-column">
+            <p>{{ currentInvoice.billerStreetAddress }}</p>
+            <p>{{ currentInvoice.billerCity }}</p>
+            <p>{{ currentInvoice.billerZipCode }}</p>
+            <p>{{ currentInvoice.billerCountry }}</p>
+          </div>
+        </div>
+
+        <div class="middle flex">
+          <div class="payment flex flex-column">
+            <h4>Invoice Date</h4>
+            <p>{{ currentInvoice.invoiceDate }}</p>
+            <h4>Payment Date</h4>
+            <p>{{ currentInvoice.paymentDueDate }}</p>
+          </div>
+
+          <div class="bill flex flex-column">
+            <h4>Bill To</h4>
+            <p>{{ currentInvoice.clientName }}</p>
+            <p>{{ currentInvoice.clientStreetAddress }}</p>
+            <p>{{ currentInvoice.clientCity }}</p>
+            <p>{{ currentInvoice.clientZipCode }}</p>
+            <p>{{ currentInvoice.clientCountry }}</p>
+          </div>
+
+          <div class="send-to flex flex-column">
+            <p>{{ currentInvoice.clientEmail }}</p>
+          </div>
+        </div>
+
+        <div class="bottom flex flex-column">
+          <div class="billing-items">
+            <div class="heading flex">
+              <p>Item Name</p>
+              <p>QTY</p>
+              <p>Price</p>
+              <p>Total</p>
+            </div>
+            <div
+              v-for="(item, index) in currentInvoice.invoiceItemList"
+              :key="index"
+              class="item flex"
+            >
+              <p>{{ item.itemName }}</p>
+              <p>{{ item.qty }}</p>
+              <p>$ {{ item.price }}</p>
+              <p>$ {{ item.total }}</p>
+            </div>
+          </div>
+          <div class="total flex">
+            <p>Amount Due</p>
+            <p>$ {{ currentInvoice.invoiceTotal }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Invoice Details <= 375px -->
+      <div v-else class="invoice-details flex flex-column">
+        <!-- Top -->
+        <div class="top flex flex-column">
+          <div class="left flex flex-column">
+            <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
+            <p>{{ currentInvoice.productDescription }}</p>
+          </div>
+          <div class="right flex flex-column">
+            <p>{{ currentInvoice.billerStreetAddress }}</p>
+            <p>{{ currentInvoice.billerCity }}</p>
+            <p>{{ currentInvoice.billerZipCode }}</p>
+            <p>{{ currentInvoice.billerCountry }}</p>
+          </div>
+        </div>
+        <!-- Middle -->
+        <div class="middle flex flex-column">
+          <div class="flex">
+            <div class="payment flex flex-column">
+              <h4>Invoice Date</h4>
+              <p>{{ currentInvoice.invoiceDate }}</p>
+              <h4>Payment Date</h4>
+              <p>{{ currentInvoice.paymentDueDate }}</p>
+            </div>
+
+            <div class="bill flex flex-column">
+              <h4>Bill To</h4>
+              <p>{{ currentInvoice.clientName }}</p>
+              <p>{{ currentInvoice.clientStreetAddress }}</p>
+              <p>{{ currentInvoice.clientCity }}</p>
+              <p>{{ currentInvoice.clientZipCode }}</p>
+              <p>{{ currentInvoice.clientCountry }}</p>
+            </div>
+          </div>
+          <div class="flex flex-column">
+            <h4>Sent to</h4>
+            <p>{{ currentInvoice.clientEmail }}</p>
+          </div>
+        </div>
+        <!-- Bottom -->
+        <div class="bottom flex flex-column">
+          <div class="billing-items">
+            <div
+              v-for="(item, index) in currentInvoice.invoiceItemList"
+              :key="index"
+              class="item flex"
+            >
+              <div class="flex flex-column">
+                <p>{{ item.itemName }}</p>
+                <p>{{ item.qty }} x $ {{ item.price }}</p>
+              </div>
+
+              <p>$ {{ item.total }}</p>
+            </div>
+          </div>
+          <div class="total flex">
+            <p>Amount Due</p>
+            <p>$ {{ currentInvoice.invoiceTotal }}</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Mobile Invoice Details <= 375px -->
-    <div v-else class="invoice-details flex flex-column">
-      <!-- Top -->
-      <div class="top flex flex-column">
-        <div class="left flex flex-column">
-          <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
-          <p>{{ currentInvoice.productDescription }}</p>
-        </div>
-        <div class="right flex flex-column">
-          <p>{{ currentInvoice.billerStreetAddress }}</p>
-          <p>{{ currentInvoice.billerCity }}</p>
-          <p>{{ currentInvoice.billerZipCode }}</p>
-          <p>{{ currentInvoice.billerCountry }}</p>
-        </div>
-      </div>
-      <!-- Middle -->
-      <div class="middle flex">
-        <div class="payment flex flex-column">
-          <h4>Invoice Date</h4>
-          <p>{{ currentInvoice.invoiceDate }}</p>
-          <h4>Payment Date</h4>
-          <p>{{ currentInvoice.paymentDueDate }}</p>
-          <h4>Sent to</h4>
-          <p>{{ currentInvoice.clientEmail }}</p>
-        </div>
-
-        <div class="bill flex flex-column">
-          <h4>Bill To</h4>
-          <p>{{ currentInvoice.clientName }}</p>
-          <p>{{ currentInvoice.clientStreetAddress }}</p>
-          <p>{{ currentInvoice.clientCity }}</p>
-          <p>{{ currentInvoice.clientZipCode }}</p>
-          <p>{{ currentInvoice.clientCountry }}</p>
-        </div>
-      </div>
-      <!-- Bottom -->
-      <div class="bottom flex flex-column">
-        <div class="billing-items">
-          <div class="heading flex">
-            <p>Item Name</p>
-            <p>QTY</p>
-            <p>Price</p>
-            <p>Total</p>
-          </div>
-          <div
-            v-for="(item, index) in currentInvoice.invoiceItemList"
-            :key="index"
-            class="item flex"
-          >
-            <p>{{ item.itemName }}</p>
-            <p>{{ item.qty }}</p>
-            <p>{{ item.price }}</p>
-            <p>{{ item.total }}</p>
-          </div>
-        </div>
-        <div class="total flex">
-          <p>Amount Due</p>
-          <p>{{ currentInvoice.invoiceTotal }}</p>
-        </div>
-      </div>
+    <div v-if="mobile" class="buttons flex">
+      <button @click="toggleEditInvoice" class="dark-purple">Edit</button>
+      <button @click="deleteInvoice(currentInvoice.docId)" class="red">
+        Delete
+      </button>
+      <button
+        v-if="currentInvoice.invoicePending"
+        @click="updateStatusToPaid(currentInvoice.docId)"
+        class="green"
+      >
+        Mark as Paid
+      </button>
+      <button
+        v-if="currentInvoice.invoiceDraft || currentInvoice.invoicePaid"
+        @click="updateStatusToPending(currentInvoice.docId)"
+        class="orange"
+      >
+        Mark as Pending
+      </button>
     </div>
   </div>
 </template>
@@ -310,8 +333,11 @@ export default {
   }
 
   .invoice-details {
-    padding: 48px;
+    padding: 16px;
     margin-top: 24px;
+    @media (min-width: 376px) {
+      padding: 48px;
+    }
 
     .top {
       flex-direction: column;
@@ -435,6 +461,7 @@ export default {
         .item {
           margin-bottom: 32px;
           font-size: 13px;
+          font-weight: bold;
           color: #fff;
 
           &:last-child {
@@ -466,11 +493,22 @@ export default {
         }
 
         p:nth-child(2) {
-          font-size: 28px;
+          font-size: 16px;
           text-align: right;
+          @media (min-width: 376px) {
+            font-size: 28px;
+          }
         }
       }
     }
   }
+}
+.buttons {
+  background-color: #1e2139;
+  padding: 20px;
+  margin: 0 -20px;
+  min-width: 375px !important;
+  justify-content: center;
+  align-items: center;
 }
 </style>
