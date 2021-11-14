@@ -3,7 +3,7 @@
 # Visit: invoice-app-9b388.web.app
 
 
-(https://github.com/bujdoluk/invoice-application/blob/master/src/assets/Screenshot%202021-11-14%20at%2017-45-14%20Home.png)
+![Invoice app](https://github.com/bujdoluk/invoice-application/blob/master/src/assets/Screenshot%202021-11-14%20at%2017-45-14%20Home.png)
 
 ## Project setup
 ```
