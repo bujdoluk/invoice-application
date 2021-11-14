@@ -11,6 +11,7 @@
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-44-31 Invoice.png)
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-45-00 Invoice.png)
 [Invoice app](https://github.com/bujdoluk/invoice-application/blob/master/src/assets/Screenshot%202021-11-14%20at%2017-45-14%20Home.png)
+(C:\Users\lukas\OneDrive\Dokumenty\Projekty\invoice-app\invoice-app\src\assets\Screenshot 2021-11-14 at 17-42-02 H)
 
 ## Project setup
 ```
