@@ -2,7 +2,7 @@
 
 # Visit: invoice-app-9b388.web.app
 
-[Invoice app](src/assets/Screenshot 2021-11-14 at 17-42-02 Home.png)
+[Invoice app](https://github.com/src/assets/Screenshot 2021-11-14 at 17-42-02 Home.png)
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-42-24 Home.png)
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-42-51 Home.png)
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-43-05 Invoice.png)
@@ -10,7 +10,7 @@
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-44-04 Home.png)
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-44-31 Invoice.png)
 [Invoice app](src/assets/Screenshot 2021-11-14 at 17-45-00 Invoice.png)
-[Invoice app](src/assets/Screenshot 2021-11-14 at 17-45-14 Home.png)
+[Invoice app](https://github.com/bujdoluk/invoice-application/blob/master/src/assets/Screenshot%202021-11-14%20at%2017-45-14%20Home.png)
 
 ## Project setup
 ```
