@@ -1,5 +1,7 @@
 # invoice-app
 
+# Visit: invoice-app-9b388.web.app
+
 ## Project setup
 ```
 npm install
