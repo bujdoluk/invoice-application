@@ -6,7 +6,9 @@
       :to="{ name: 'Invoice', params: { invoiceId: invoice.invoiceId } }"
     >
       <div class="left flex">
-        <span class="tracking-number">#{{ invoice.invoiceId }}</span>
+        <span class="tracking-number"
+          ><span class="tracking-sign">#</span>{{ invoice.invoiceId }}</span
+        >
         <span class="due-date">{{ invoice.paymentDueDate }}</span>
         <span class="person">{{ invoice.clientName }}</span>
       </div>
@@ -21,9 +23,11 @@
             pending: invoice.invoicePending,
           }"
         >
-          <span v-if="invoice.invoicePaid">Paid</span>
-          <span v-if="invoice.invoiceDraft">Draft</span>
-          <span v-if="invoice.invoicePending">Pending</span>
+          <span class="green-font" v-if="invoice.invoicePaid">Paid</span>
+          <span class="draft-font" v-if="invoice.invoiceDraft">Draft</span>
+          <span class="pending-font" v-if="invoice.invoicePending"
+            >Pending</span
+          >
         </div>
         <div class="icon">
           <img src="@/assets/icon-arrow-right.svg" alt="right" />
@@ -94,10 +98,10 @@ export default {
   cursor: pointer;
   gap: 16px;
   margin-bottom: 16px;
-  color: #fff;
+  color: #858bb2;
   border-radius: 20px;
   padding: 14px 16px;
-  background-color: #1e2139;
+  background-color: #fff;
   align-items: center;
   @media (min-width: 376px) {
     padding: 28px 32px;
@@ -124,6 +128,11 @@ export default {
     .tracking-number {
       text-transform: uppercase;
       font-weight: bold;
+      color: black;
+    }
+
+    .tracking-sign {
+      color: #858bb2;
     }
   }
 
@@ -137,12 +146,28 @@ export default {
 
     .status-button {
       margin: 0 auto;
+
+      .draft-font {
+        color: #858bb2;
+        font-weight: bold;
+      }
+
+      .pending-font {
+        color: #ff8f00;
+        font-weight: bold;
+      }
+
+      .paid-font {
+        color: #33d69f;
+        font-weight: bold;
+      }
     }
 
     .price {
       flex: 1;
       font-size: 16px;
       font-weight: bold;
+      color: black;
     }
   }
 }

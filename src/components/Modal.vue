@@ -1,6 +1,7 @@
 <template>
   <div class="modal flex">
     <div class="modal-content">
+      <p class="confirm">Confirm Deletion</p>
       <p>Are you sure you want to exit? Your changes will not be saved?</p>
       <div class="actions flex">
         <button @click="closeModal" class="purple">Return</button>
@@ -45,14 +46,23 @@ export default {
   width: 100%;
 
   .modal-content {
+    border: 2px solid #dededf;
     border-radius: 20px;
     padding: 48px 32px;
     max-width: 450px;
-    background-color: #252945;
+    background-color: #fff;
     color: #fff;
+
+    .confirm {
+      color: black;
+      font-weight: bold;
+      text-align: left;
+      font-size: 24px;
+    }
 
     p {
       text-align: center;
+      color: #888eb0;
     }
 
     .actions {

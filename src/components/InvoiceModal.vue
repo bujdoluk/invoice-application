@@ -466,8 +466,8 @@ export default {
     padding: 56px;
     max-width: 700px;
     width: 100%;
-    background-color: #141625;
-    color: #fff;
+    background-color: #fff;
+    color: #7e88c3;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -1px rgba(0, 0, 0, 0.06);
     padding-top: 90px;
@@ -477,7 +477,7 @@ export default {
 
     h1 {
       margin-bottom: 48px;
-      color: #fff;
+      color: black;
     }
 
     h3 {
@@ -563,11 +563,12 @@ export default {
         }
 
         .button {
-          color: #fff;
-          background-color: #252945;
+          color: #777f98;
+          background-color: #f9fafe;
           align-items: center;
           justify-content: center;
           width: 100%;
+          font-weight: bold;
 
           img {
             margin-right: 4px;
@@ -601,11 +602,12 @@ export default {
   input,
   select {
     width: 100%;
-    background-color: #1e2139;
-    color: #fff;
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
     border-radius: 4px;
     padding: 12px 4px;
-    border: none;
+    border: 1px solid #dfe3fa;
 
     &:focus {
       outline: none;

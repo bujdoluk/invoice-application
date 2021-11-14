@@ -66,7 +66,7 @@
       <div v-if="!mobile" class="invoice-details flex flex-column">
         <div class="top flex">
           <div class="left flex flex-column">
-            <p><span>#</span>{{ currentInvoice.invoiceId }}</p>
+            <p class="id"><span>#</span>{{ currentInvoice.invoiceId }}</p>
             <p>{{ currentInvoice.productDescription }}</p>
           </div>
           <div class="right flex flex-column">
@@ -288,7 +288,8 @@ export default {
   .nav-link {
     margin-bottom: 32px;
     align-items: center;
-    color: #fff;
+    color: black;
+    font-weight: bold;
     font-size: 12px;
     img {
       margin-right: 16px;
@@ -299,8 +300,9 @@ export default {
 
   .header,
   .invoice-details {
-    background-color: #1e2139;
-    border-radius: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 2px -2px #dfe3fa;
   }
 
   .header {
@@ -317,7 +319,7 @@ export default {
       }
 
       span {
-        color: #dfe3fa;
+        color: #7e88c3;
         margin-right: 16px;
       }
     }
@@ -346,7 +348,7 @@ export default {
         flex-direction: row;
       }
       div {
-        color: #dfe3fa;
+        color: #7e88c3;
         flex: 1;
       }
 
@@ -360,7 +362,8 @@ export default {
         p:first-child {
           font-size: 24px;
           text-transform: uppercase;
-          color: #fff;
+          color: black;
+          font-weight: bold;
           margin-bottom: 8px;
         }
 
@@ -385,7 +388,7 @@ export default {
 
     .middle {
       margin-top: 50px;
-      color: #dfe3fa;
+      color: #7e88c3;
       gap: 16px;
 
       h4 {
@@ -440,10 +443,10 @@ export default {
       .billing-items {
         padding: 32px;
         border-radius: 20px 20px 0 0;
-        background-color: #252945;
+        background-color: #f9fafe;
 
         .heading {
-          color: #dfe3fa;
+          color: #7e88c3;
           font-size: 12px;
           margin-bottom: 32px;
 
@@ -462,7 +465,7 @@ export default {
           margin-bottom: 32px;
           font-size: 13px;
           font-weight: bold;
-          color: #fff;
+          color: #7e88c3;
 
           &:last-child {
             margin-bottom: 0;
@@ -483,7 +486,7 @@ export default {
       .total {
         color: #fff;
         padding: 32px;
-        background-color: rgba(12, 14, 22, 0.7);
+        background-color: #373b53;
         align-items: center;
         border-radius: 0 0 20px 20px;
 
@@ -504,7 +507,7 @@ export default {
   }
 }
 .buttons {
-  background-color: #1e2139;
+  background-color: #fff;
   padding: 20px;
   margin: 0 -20px;
   min-width: 375px !important;

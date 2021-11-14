@@ -28,7 +28,7 @@
           <div class="inner-button flex">
             <img src="@/assets/icon-plus.svg" alt="" />
           </div>
-          <span>New Invoice</span>
+          <span class="new-invoice">New Invoice</span>
         </div>
       </div>
       <div v-else class="right flex">
@@ -158,11 +158,14 @@ export default {
 
     .left {
       h1 {
-        font-size: 20px;
+        font-size: 32px;
+        font-weight: bold;
+        color: black;
       }
 
       span {
         font-size: 12px;
+        color: #888eb0;
       }
     }
 
@@ -170,14 +173,25 @@ export default {
       justify-content: flex-end;
       align-items: center;
 
-      .button,
+      .button {
+        align-items: center;
+        font-weight: bold;
+      }
+
       .filter {
         align-items: center;
         font-weight: bold;
 
         span {
           font-size: 12px;
+          color: black;
+          align-items: center;
+          font-weight: bold;
         }
+      }
+
+      .new-invoice {
+        color: #fff;
       }
 
       .filter {
@@ -201,7 +215,7 @@ export default {
           position: absolute;
           top: 25px;
           list-style: none;
-          background-color: #1e2139;
+          background-color: #fff;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
             0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
@@ -210,10 +224,11 @@ export default {
           cursor: pointer;
           font-size: 12px;
           padding: 10px 20px;
+          color: #000;
 
           &:hover {
-            color: #1e2139;
-            background-color: #fff;
+            color: #fff;
+            background-color: #9277ff;
           }
         }
       }

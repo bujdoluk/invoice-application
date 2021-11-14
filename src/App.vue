@@ -1,6 +1,5 @@
 <template>
-  <div class="app flex" v-if="invoicesLoaded">
-    <Login />
+  <div v-if="invoicesLoaded">
     <!-- <div>
       <div v-if="showLogin">
         <h2>Login</h2>
@@ -20,7 +19,7 @@
         >
       </div>
     </div> -->
-    <!-- <div class="app flex flex-column">
+    <div class="app flex flex-column">
       <Navigation />
       <div class="app-content flex flex-column">
         <Modal v-if="modalActive" />
@@ -29,7 +28,7 @@
         </transition>
         <router-view />
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -82,7 +81,7 @@ export default {
 }
 
 .app {
-  background-color: #141625;
+  background-color: #f8f8fb;
   min-height: 100vh;
   @media (min-width: 900px) {
     flex-direction: row !important;
@@ -206,5 +205,11 @@ button,
   }
   color: #dfe3fa;
   background-color: rgba(223, 227, 250, 0.1);
+}
+// Dark Mode
+.app {
+  &dark-mode {
+    background: black;
+  }
 }
 </style>

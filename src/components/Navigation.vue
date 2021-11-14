@@ -6,8 +6,9 @@
     <div class="bottom flex">
       <div class="theme flex">
         <img
-          @click="switchTheme"
+          @click="modeToggle"
           class="theme-img"
+          :class="darkTheme"
           src="@/assets/icon-sun.svg"
           alt="sun"
         />
@@ -22,6 +23,38 @@
 <script>
 export default {
   name: "navigation",
+  data() {
+    return {
+      darkMode: false,
+    };
+  },
+  methods: {
+    dark() {
+      document.querySelector("body").classList.add("dark-mode");
+      this.darkMode = true;
+      this.$emit("dark");
+    },
+    ligth() {
+      document.querySelector("body").classList.remove("dark-mode");
+      this.darkMode = false;
+      this.$emit("light");
+    },
+    modeToggle() {
+      if (
+        this.darkMode ||
+        document.querySelector("body").classList.contains("dark-mode")
+      ) {
+        this.ligth();
+      } else {
+        this.dark();
+      }
+    },
+  },
+  computed: {
+    darkTheme() {
+      return this.darkMode && "darkMode-toggled";
+    },
+  },
 };
 </script>
 
@@ -79,15 +112,21 @@ header {
   width: 25px;
   height: 25px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .avatar {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  cursor: pointer;
   margin: 0 20px;
   @media (min-width: 900px) {
     margin: 20px 0;
   }
+}
+// Dark Mode
+.dark-mode {
+  background: black;
 }
 </style>
