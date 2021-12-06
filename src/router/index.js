@@ -4,6 +4,18 @@ import InvoiceView from '../views/InvoiceView.vue'
 import Login from "../components/Login.vue";
 import Signup from "../components/Signup.vue";
 
+// route guard
+import { projectAuth } from '../firebase/config';
+
+const requireAuth = (to, from, next) => {
+  let user = projectAuth.currentUser
+  if (!user) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
+}
+
 const routes = [
   {
     path: '/',
@@ -17,6 +29,7 @@ const routes = [
     path: '/invoice/:invoiceId',
     name: 'Invoice',
     component: InvoiceView,
+    beforeEnter: requireAuth,
     meta: {
       title: "Invoice",
     }

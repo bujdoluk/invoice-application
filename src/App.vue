@@ -1,24 +1,5 @@
 <template>
   <div v-if="invoicesLoaded">
-    <!-- <div>
-      <div v-if="showLogin">
-        <h2>Login</h2>
-        <Login />
-        <p>
-          No accoutn yet?
-          <span @click="showLogin = false">Sign Up</span>instead
-        </p>
-      </div>
-      <div v-else>
-        <h2>Sing up</h2>
-        <Signup />
-        <p>
-          Already registered?<span @click="showLogin = true">Log in</span
-          >instead
-        </p>
-        >
-      </div>
-    </div> -->
     <div class="app flex flex-column">
       <Navigation />
       <div class="app-content flex flex-column">

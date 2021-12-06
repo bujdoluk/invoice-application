@@ -1,22 +1,33 @@
 <template>
-  <form class="login-form flex flex-column" @submit.prevent="handleSubmit">
-    <input
-      class="input"
-      type="email"
-      required
-      placeholder="email"
-      v-model="email"
-    />
-    <input
-      class="input"
-      type="password"
-      required
-      placeholder="password"
-      v-model="password"
-    />
-    <div class="error">{{ error }}</div>
-    <button class="purple">Log in</button>
-  </form>
+  <div class="flex flex-column">
+    <div>
+      <form class="login-form flex flex-column" @submit.prevent="handleSubmit">
+        <h3>Login</h3>
+        <input
+          class="input"
+          type="email"
+          required
+          placeholder="email"
+          v-model="email"
+        />
+        <input
+          class="input"
+          type="password"
+          required
+          placeholder="password"
+          v-model="password"
+        />
+        <div v-if="error" class="error">{{ error }}</div>
+        <button class="purple">Log in</button>
+      </form>
+    </div>
+
+    <div class="browse flex">
+      <button class="link">
+        <router-link :to="{ name: 'Home' }">Browse as a Guest</router-link>
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,21 +47,21 @@ export default {
     const handleSubmit = async () => {
       await login(email.value, password.value);
       if (!error.value) {
-        router.push("/");
+        router.push({ name: "Home" });
       }
     };
 
-    return { email, password, handleSubmit };
+    return { email, password, handleSubmit, error };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .login-form {
-  background-color: #1e2139;
+  background-color: #f8f8fb;
   width: 500px;
   height: 300px;
-  margin: 0 auto;
+  margin: 200px auto;
   padding: 32px;
   gap: 16px;
   justify-content: center;
@@ -62,11 +73,39 @@ export default {
   .input {
     border-radius: 50%;
     width: 100%;
-    background-color: #252945;
-    color: #fff;
+    background-color: rgb(255, 255, 255);
+    color: black;
     border-radius: 4px;
     padding: 12px 4px;
     border: none;
+  }
+
+  input:placeholder-shown {
+    color: black;
+  }
+
+  h3 {
+    color: #7c5dfa;
+  }
+}
+
+.browse {
+  justify-content: center;
+  align-items: center;
+  margin-top: -200px;
+  .link {
+    width: 180px;
+    padding: 20px;
+    background-color: #7c5dfa;
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+  .link:hover {
+    background-color: #9277ff;
   }
 }
 </style>

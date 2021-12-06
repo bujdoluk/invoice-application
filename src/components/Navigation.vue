@@ -1,7 +1,18 @@
 <template>
   <header class="flex">
+    <div class="background flex"></div>
     <div class="top flex">
       <img src="@/assets/logo.svg" alt="logo" />
+    </div>
+
+    <div class="links flex">
+      <div v-if="user">
+        <button class="logout" @click="handleClick">Logout</button>
+      </div>
+      <div class="flex flex-column" v-else>
+        <router-link class="btn" :to="{ name: 'Signup' }">Sign Up</router-link>
+        <router-link class="btn" :to="{ name: 'Login' }">Log In</router-link>
+      </div>
     </div>
     <div class="bottom flex">
       <div class="theme flex">
@@ -21,39 +32,23 @@
 </template>
 
 <script>
+import useLogout from "@/composables/useLogout";
+import getUser from "@/composables/getUser";
+import { useRouter } from "vue-router";
+
 export default {
-  name: "navigation",
-  data() {
-    return {
-      darkMode: false,
+  setup() {
+    const { user } = getUser();
+    const { logout } = useLogout();
+    const router = useRouter();
+
+    const handleClick = async () => {
+      await logout();
+      console.log("User Logged Out");
+      router.push({ name: "Login" });
     };
-  },
-  methods: {
-    dark() {
-      document.querySelector("body").classList.add("dark-mode");
-      this.darkMode = true;
-      this.$emit("dark");
-    },
-    ligth() {
-      document.querySelector("body").classList.remove("dark-mode");
-      this.darkMode = false;
-      this.$emit("light");
-    },
-    modeToggle() {
-      if (
-        this.darkMode ||
-        document.querySelector("body").classList.contains("dark-mode")
-      ) {
-        this.ligth();
-      } else {
-        this.dark();
-      }
-    },
-  },
-  computed: {
-    darkTheme() {
-      return this.darkMode && "darkMode-toggled";
-    },
+
+    return { handleClick, user };
   },
 };
 </script>
@@ -61,26 +56,37 @@ export default {
 <style lang="scss" scoped>
 header {
   z-index: 99;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   background-color: #1e2139;
-  @media (min-width: 900px) {
-    min-height: 100%;
-    min-width: 90px;
-    flex-direction: column;
-    border-radius: 0 20px 20px 0;
+  max-width: 80px;
+  position: relative;
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+    flex-direction: row;
   }
 }
 
+.background {
+  width: 80px;
+  height: 80px;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(#f8f8fb, #1e2139);
+}
+
 .top {
+  position: fixed;
+  z-index: 2;
+  max-width: 80px;
+  max-height: 80px;
   border-radius: 0 20px 20px 0;
   background-color: #7c5dfa;
   justify-content: center;
-
   padding: 24px;
-  @media (min-width: 900px) {
-    width: 100%;
-  }
 
   img {
     width: auto;
@@ -88,18 +94,48 @@ header {
   }
 }
 
+.links {
+  color: white;
+  font-weight: bold;
+  margin-top: 700px;
+  text-align: center;
+  padding: 8px;
+
+  .btn {
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .btn:hover {
+    color: #7c5dfa;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  .logout {
+    font-weight: bold;
+    color: white;
+    background: none;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .logout:hover {
+    color: #7c5dfa;
+  }
+}
+
 .bottom {
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  @media (min-width: 900px) {
-    flex-direction: column;
-  }
+  flex-direction: column;
 }
 
 .theme {
   border-right: 1px solid grey;
-  width: 90px;
+  width: 80px;
   justify-content: center;
   padding: 25px;
   @media (min-width: 900px) {
@@ -124,9 +160,5 @@ header {
   @media (min-width: 900px) {
     margin: 20px 0;
   }
-}
-// Dark Mode
-.dark-mode {
-  background: black;
 }
 </style>
