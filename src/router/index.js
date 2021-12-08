@@ -16,24 +16,9 @@ const requireAuth = (to, from, next) => {
   }
 }
 
+// requireAuth temporarily disabled
+
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-    meta: {
-      title: "Home",
-    }
-  },
-  {
-    path: '/invoice/:invoiceId',
-    name: 'Invoice',
-    component: InvoiceView,
-    beforeEnter: requireAuth,
-    meta: {
-      title: "Invoice",
-    }
-  },
   {
     path: '/login',
     name: 'Login',
@@ -49,7 +34,27 @@ const routes = [
     meta: {
       title: "Sign Up",
     }
-  }
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    //beforeEnter: requireAuth,
+    meta: {
+      title: "Home",
+      requireAuth: false
+    }
+  },
+  {
+    path: '/invoice/:invoiceId',
+    name: 'Invoice',
+    component: InvoiceView,
+    //beforeEnter: requireAuth,
+    meta: {
+      title: "Invoice",
+    }
+  },
+
 ]
 
 const router = createRouter({

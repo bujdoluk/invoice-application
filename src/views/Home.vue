@@ -161,6 +161,9 @@ export default {
         font-size: 32px;
         font-weight: bold;
         color: black;
+        @media only screen and (max-width: 376px) {
+          font-size: 18px;
+        }
       }
 
       span {

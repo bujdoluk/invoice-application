@@ -64,12 +64,13 @@ export default {
 .app {
   background-color: #f8f8fb;
   min-height: 100vh;
-  @media (min-width: 900px) {
-    flex-direction: row !important;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
   }
 
   .app-content {
-    padding: 0 20px;
+    padding: 60px 20px;
     flex: 1;
     position: relative;
   }
@@ -143,9 +144,7 @@ button,
   padding: 40px 10px;
   max-width: 850px;
   margin: 0 auto;
-  @media (min-width: 900px) {
-    padding-top: 72px;
-  }
+  padding-top: 72px;
 }
 .nav-link {
   text-decoration: none;

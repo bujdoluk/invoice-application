@@ -9,7 +9,7 @@
       <div v-if="user">
         <button class="logout" @click="handleClick">Logout</button>
       </div>
-      <div class="flex flex-column" v-else>
+      <div class="logsign flex" v-else>
         <router-link class="btn" :to="{ name: 'Signup' }">Sign Up</router-link>
         <router-link class="btn" :to="{ name: 'Login' }">Log In</router-link>
       </div>
@@ -59,12 +59,14 @@ header {
   flex-direction: column;
   justify-content: space-between;
   background-color: #1e2139;
-  max-width: 80px;
-  position: relative;
+  width: 80px;
+  height: 100%;
+  position: fixed;
 
   @media only screen and (max-width: 900px) {
     width: 100%;
     flex-direction: row;
+    height: 80px;
   }
 }
 
@@ -75,7 +77,10 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background: linear-gradient(#f8f8fb, #1e2139);
+  background: (#f8f8fb 50%, #1e2139 50%);
+  @media only screen and (max-width: 900px) {
+    background: #1e2139;
+  }
 }
 
 .top {
@@ -99,7 +104,27 @@ header {
   font-weight: bold;
   margin-top: 700px;
   text-align: center;
-  padding: 8px;
+
+  @media only screen and (max-width: 900px) {
+    margin-top: 0;
+    align-items: center;
+    padding-top: 10px;
+  }
+
+  .logsign {
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 8px;
+    @media only screen and (max-width: 900px) {
+      padding: 0px;
+      margin-left: 100px;
+      width: 100%;
+      gap: 20px;
+      flex-direction: row;
+    }
+  }
 
   .btn {
     color: white;
@@ -118,8 +143,8 @@ header {
     color: white;
     background: none;
     font-size: 14px;
-    text-align: center;
     margin-top: 40px;
+    margin-left: -15px;
   }
 
   .logout:hover {
@@ -129,18 +154,22 @@ header {
 
 .bottom {
   justify-content: center;
-  align-items: center;
+  //align-items: center;
   flex-direction: column;
+
+  @media only screen and (max-width: 900px) {
+    flex-direction: row;
+  }
 }
 
 .theme {
-  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
   width: 80px;
   justify-content: center;
   padding: 25px;
-  @media (min-width: 900px) {
-    border-bottom: 1px solid grey;
-    border-right: none;
+  @media (max-width: 900px) {
+    border-right: 1px solid grey;
+    border-bottom: none;
   }
 }
 
@@ -156,9 +185,10 @@ header {
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
-  margin: 0 20px;
-  @media (min-width: 900px) {
-    margin: 20px 0;
+
+  margin: 20px 24px;
+  @media (max-width: 900px) {
+    margin: 24px 20px;
   }
 }
 </style>
