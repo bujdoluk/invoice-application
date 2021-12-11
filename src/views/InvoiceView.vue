@@ -284,6 +284,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+:root {
+  --background-color-primary: #f8f8fb;
+  --background-color-secondary: #ffffff;
+  --accent-color: #cacaca;
+  --text-primary-color: #222;
+  --element-size: 4rem;
+}
+
+:root.dark-theme {
+  --background-color-primary: #141625;
+  --background-color-secondary: #1e2139;
+  --accent-color: #3f3f3f;
+  --text-primary-color: #ddd;
+}
+
 .invoice-view {
   .nav-link {
     margin-bottom: 32px;
@@ -329,7 +344,7 @@ export default {
       justify-content: flex-end;
 
       button {
-        color: #fff;
+        color: var(--background-color-secondary);
       }
     }
   }
@@ -484,7 +499,7 @@ export default {
       }
 
       .total {
-        color: #fff;
+        color: var(--background-color-secondary);
         padding: 32px;
         background-color: #373b53;
         align-items: center;
@@ -507,7 +522,7 @@ export default {
   }
 }
 .buttons {
-  background-color: #fff;
+  background-color: var(--background-color-secondary);
   padding: 20px;
   margin: 0 -20px;
   min-width: 375px !important;
