@@ -21,60 +21,24 @@ import Modal from "./components/Modal.vue";
 import Signup from "./components/Signup.vue";
 import Login from "./components/Login.vue";
 export default {
-  mounted() {
-    const initialTheme = this.getMediaPreference();
-    this.setTheme(initialTheme);
-  },
   data() {
     return {
-      //mobile: null,
       showLogin: null,
-      userTheme: "light-theme",
     };
   },
-  components: { Navigation, InvoiceModal, Modal, Signup, Login },
+  components: {
+    Navigation,
+    InvoiceModal,
+    Modal,
+    Signup,
+    Login,
+  },
   created() {
     this.GET_INVOICES();
-    //this.checkScreen();
     window.addEventListener("resize", this.checkScreen);
   },
   methods: {
     ...mapActions(["GET_INVOICES"]),
-
-    // checkScreen() {
-    //   const windowWidth = window.innerWidth;
-    //   if (windowWidth <= 750) {
-    //     this.mobile = true;
-    //     return;
-    //   }
-    //   this.mobile = false;
-    // },
-
-    setTheme(theme) {
-      localStorage.setItem("user-theme", theme);
-      this.userTheme = theme;
-      document.documentElement.className = theme;
-    },
-
-    toggleTheme() {
-      const activeTheme = localStorage("user-theme");
-      if (activeTheme === "light-theme") {
-        this.setTheme("dark-theme");
-      } else {
-        this.setTheme("light-theme");
-      }
-    },
-
-    getMediaPreference() {
-      const hasDarkPreference = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      if (hasDarkPreference) {
-        return "dark-theme";
-      } else {
-        return "light-theme";
-      }
-    },
   },
   computed: {
     ...mapState(["invoiceModal", "modalActive", "invoicesLoaded"]),
@@ -92,18 +56,8 @@ export default {
   font-family: "Poppins", sans-serif;
 }
 
-:root {
-  --background-primary: #f8f8fb;
-  --background-secondary: #ffffff;
-}
-
-:root.dark-theme {
-  --background-primary: #141625;
-  --background-secondary: #1e2139;
-}
-
 .app {
-  background-color: var(--background-primary);
+  background-color: #f8f8fb;
   min-height: 100vh;
 
   @media (max-width: 900px) {
@@ -122,8 +76,8 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: var(--background-primary);
-  color: var(--background-secondary);
+  background-color: white;
+  color: white;
 
   p {
     margin-top: 16px;
@@ -150,7 +104,7 @@ button,
   border: none;
   font-size: 12px;
   margin-right: 8px;
-  color: var(--background-secondary);
+  color: white;
 }
 .dark-purple {
   background-color: #252945;
@@ -227,5 +181,4 @@ button,
   color: #dfe3fa;
   background-color: rgba(223, 227, 250, 0.1);
 }
-// Dark Mode
 </style>

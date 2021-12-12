@@ -93,21 +93,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-:root {
-  --background-color-primary: #f8f8fb;
-  --background-color-secondary: #ffffff;
-  --accent-color: #cacaca;
-  --text-primary-color: #222;
-  --element-size: 4rem;
-}
-
-:root.dark-theme {
-  --background-color-primary: #141625;
-  --background-color-secondary: #1e2139;
-  --accent-color: #3f3f3f;
-  --text-primary-color: #ddd;
-}
-
 .invoice {
   text-decoration: none;
   cursor: pointer;
@@ -116,7 +101,7 @@ export default {
   color: #858bb2;
   border-radius: 20px;
   padding: 14px 16px;
-  background-color: var(--background-color-secondary);
+  background-color: white;
   align-items: center;
   @media (min-width: 376px) {
     padding: 28px 32px;
@@ -143,7 +128,7 @@ export default {
     .tracking-number {
       text-transform: uppercase;
       font-weight: bold;
-      color: black;
+      color: var(--number, black);
     }
 
     .tracking-sign {
