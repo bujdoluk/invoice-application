@@ -1,6 +1,6 @@
 # invoice-app
 
-# Visit: invoice-app-9b388.web.app
+# Link: invoice-app-9b388.web.app
 
 
 ![Invoice app](https://github.com/bujdoluk/invoice-application/blob/master/src/assets/Screenshot%202021-11-14%20at%2017-42-02%20Home.png)
